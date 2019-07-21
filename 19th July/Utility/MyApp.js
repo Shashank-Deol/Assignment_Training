@@ -131,3 +131,26 @@ function updatePhotoesList(response){
         document.getElementById('user-list').appendChild(userElement);
     }
 }
+
+
+//Using fetch and Promise
+function usingFetchAndPromises(){
+
+const fetchPromise = fetch("https://jsonplaceholder.typicode.com/users");
+// Target main element
+const main = document.getElementById("user-list");
+fetchPromise.then(response => {
+  return response.json();
+}).then(people => {
+    const names = people.map(person => person.name).join("\n");
+    const email = people.map(person => person.email).join("\n");
+    const phone = people.map(person => person.phone).join("\n");
+    // Append names to main element
+    for (var i=0;i<names.length;i++){
+        main.innerHTML = names[i]+"\n"+email[i]+"\n"+phone[i]
+        main.innerHTML = "\n\n"
+    }
+    main.innerHTML = names+email+phone;
+});
+
+}
